@@ -1,159 +1,27 @@
-<!DOCTYPE html>
-<html lang="en-us">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<meta name="theme-color" content="#494f5c">
-	<meta name="msapplication-TileColor" content="#494f5c">
-<meta itemprop="name" content="Problemas com libc no Debian">
-<meta itemprop="description" content="Ao encontrar erros na compilação do novo Atom, um amigo meu tentou experimentar a compilação com uma biblioteca libc alternativa. A troca de libs acabou deixando-o com o seguinte erro ao rodar qualquer comando:
-error while loading shared libraries: libc.so.6: cannot open shared object file: No such file or directory  A biblioteca C é muito importante para um sistema Linux, visto que praticamente todas as aplicações dependem dela. No caso, esta nova versão não era compatível com as aplicações disponíveis e o sistema deixou de funcionar corretamente."><meta itemprop="datePublished" content="2014-05-21T21:00:35-03:00" />
-<meta itemprop="dateModified" content="2014-05-21T21:00:35-03:00" />
-<meta itemprop="wordCount" content="298">
-<meta itemprop="keywords" content="" /><meta property="og:title" content="Problemas com libc no Debian" />
-<meta property="og:description" content="Ao encontrar erros na compilação do novo Atom, um amigo meu tentou experimentar a compilação com uma biblioteca libc alternativa. A troca de libs acabou deixando-o com o seguinte erro ao rodar qualquer comando:
-error while loading shared libraries: libc.so.6: cannot open shared object file: No such file or directory  A biblioteca C é muito importante para um sistema Linux, visto que praticamente todas as aplicações dependem dela. No caso, esta nova versão não era compatível com as aplicações disponíveis e o sistema deixou de funcionar corretamente." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://prgrmmr.org/posts/problemas-com-libc-debian-based/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2014-05-21T21:00:35-03:00" />
-<meta property="article:modified_time" content="2014-05-21T21:00:35-03:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Problemas com libc no Debian"/>
-<meta name="twitter:description" content="Ao encontrar erros na compilação do novo Atom, um amigo meu tentou experimentar a compilação com uma biblioteca libc alternativa. A troca de libs acabou deixando-o com o seguinte erro ao rodar qualquer comando:
-error while loading shared libraries: libc.so.6: cannot open shared object file: No such file or directory  A biblioteca C é muito importante para um sistema Linux, visto que praticamente todas as aplicações dependem dela. No caso, esta nova versão não era compatível com as aplicações disponíveis e o sistema deixou de funcionar corretamente."/>
-
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-	<link rel="manifest" href="/site.webmanifest">
-	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
-	<link rel="shortcut icon" href="/favicon.ico">
-
-	<title>Problemas com libc no Debian</title>
-	<link rel="stylesheet" href="https://prgrmmr.org/css/style.min.2a3317f9a06d2aca754796ebe65a7f0f3f5b404762e0610fa94d939cfd384b7e.css" integrity="sha256-KjMX+aBtKsp1R5br5lp/Dz9bQEdi4GEPqU2TnP04S34=" crossorigin="anonymous">
-	
-</head>
-
-<body id="page">
-	
-	<header id="site-header" class="animated slideInUp faster">
-		<div class="hdr-wrapper section-inner">
-			<div class="hdr-left">
-				<div class="site-branding">
-					<a href="https://prgrmmr.org/">PRGRMMR</a>
-				</div>
-				<nav class="site-nav hide-in-mobile">
-					
-				<a href="https://prgrmmr.org/posts/">Blog</a>
-				<a href="https://prgrmmr.org/about/">About</a>
-
-				</nav>
-			</div>
-			<div class="hdr-right hdr-icons">
-				<span class="hdr-social hide-in-mobile"><a href="https://www.linkedin.com/in/henrique-magalh%C3%A3es-33074223/" target="_blank" rel="noopener me" title="Linkedin"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="https://github.com/magalhaesh" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a><a href="https://t.me/magalhaesh" target="_blank" rel="noopener me" title="Telegram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-8.609 3.33c-2.068.8-4.133 1.598-5.724 2.21a405.15 405.15 0 0 1-2.849 1.09c-.42.147-.99.332-1.473.901-.728.968.193 1.798.919 2.286 1.61.516 3.275 1.009 4.654 1.472.509 1.793.997 3.592 1.48 5.388.16.36.506.494.864.498l-.002.018s.281.028.555-.038a2.1 2.1 0 0 0 .933-.517c.345-.324 1.28-1.244 1.811-1.764l3.999 2.952.032.018s.442.311 1.09.355c.324.022.75-.04 1.116-.308.37-.27.613-.702.728-1.196.342-1.492 2.61-12.285 2.997-14.072l-.01.042c.27-1.006.17-1.928-.455-2.474a1.654 1.654 0 0 0-1.034-.407z"/></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
-			</div>
-		</div>
-	</header>
-	<div id="mobile-menu" class="animated fast">
-		<ul>
-			<li><a href="https://prgrmmr.org/posts/">Blog</a></li>
-			<li><a href="https://prgrmmr.org/about/">About</a></li>
-		</ul>
-	</div>
-
-
-	<main class="site-main section-inner animated fadeIn faster">
-		<article class="thin">
-			<header class="post-header">
-				<div class="post-meta"><span>May 21, 2014</span></div>
-				<h1>Problemas com libc no Debian</h1>
-			</header>
-			<div class="content">
-				<p>Ao encontrar erros na compilação do novo <a href="https://atom.io/">Atom</a>, um amigo meu tentou experimentar a compilação com uma biblioteca libc alternativa. A troca de libs acabou deixando-o com o seguinte erro ao rodar qualquer comando:</p>
-<pre><code>error while loading shared libraries: libc.so.6: 
-    cannot open shared object file: No such file or directory
-</code></pre>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="alternate" type="application/rss+xml" title="PRGRMMR" href="/rss.xml"><link rel="canonical" href="https://prgrmmr.org/posts/problemas-com-libc-debian-based/"><title>Problemas com libc no Debian · PRGRMMR</title><meta name="description" content="Problemas com libc no Debian"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:url" content="https://prgrmmr.org/posts/problemas-com-libc-debian-based/"><meta property="og:title" content="Problemas com libc no Debian · PRGRMMR"><meta property="og:description" content="Problemas com libc no Debian"><!-- Google Analytics (GA4) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-BFQP2F9CTZ"></script><script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BFQP2F9CTZ');
+  </script><link rel="stylesheet" href="/_astro/_slug_.Crzmtsm8.css">
+<style>.generative-art[data-astro-cid-vzfnd445]{display:block;margin:0 auto}
+.bg-mandala[data-astro-cid-gjtny2mx]{position:fixed;bottom:-400px;right:-400px;opacity:.07;pointer-events:none;z-index:0}.post-article[data-astro-cid-gjtny2mx]{position:relative;z-index:1}.header-mandala[data-astro-cid-gjtny2mx]{width:120px;height:120px;margin:0 auto}.header-mandala[data-astro-cid-gjtny2mx] canvas{width:120px!important;height:120px!important}.post-header[data-astro-cid-gjtny2mx]{text-align:center;margin-bottom:1.5rem}.post-header[data-astro-cid-gjtny2mx] h1[data-astro-cid-gjtny2mx]{margin-top:1rem;margin-bottom:.3rem}.post-date[data-astro-cid-gjtny2mx]{font-size:.9rem;font-style:italic}@media(max-width:900px){.bg-mandala[data-astro-cid-gjtny2mx]{display:none}}
+</style></head> <body> <header class="site-header" data-astro-cid-3ef6ksr2> <div class="header-inner" data-astro-cid-3ef6ksr2> <a href="/" class="site-title" data-astro-cid-3ef6ksr2>PRGRMMR</a> <nav class="site-nav" data-astro-cid-3ef6ksr2> <a href="/posts" class="active" data-astro-cid-3ef6ksr2>Posts</a> <a href="/about" data-astro-cid-3ef6ksr2>About</a> </nav> </div> </header>  <main class="page-container">  <div class="bg-mandala" data-astro-cid-gjtny2mx> <canvas class="generative-art" data-seed="problemas-com-libc-debian-based" data-size="1200" data-complexity="5" data-animate="false" width="1200" height="1200" style="width: 1200px; height: 1200px;" data-astro-cid-vzfnd445></canvas> <script type="module" src="/_astro/GenerativeArt.astro_astro_type_script_index_0_lang.7RMFUpT3.js"></script>  </div> <article class="post-article" data-astro-cid-gjtny2mx> <header class="post-header" data-astro-cid-gjtny2mx> <div class="header-mandala" data-astro-cid-gjtny2mx> <canvas class="generative-art" data-seed="problemas-com-libc-debian-based" data-size="400" data-complexity="5" data-animate="false" width="400" height="400" style="width: 400px; height: 400px;" data-astro-cid-vzfnd445></canvas>   </div> <h1 data-astro-cid-gjtny2mx>Problemas com libc no Debian</h1> <time class="post-date text-muted" datetime="2014-05-22T00:00:35.000Z" data-astro-cid-gjtny2mx> May 22, 2014 </time> </header> <div class="ornament" role="separator" data-astro-cid-alqif24d><span class="line" data-astro-cid-alqif24d></span><span data-astro-cid-alqif24d>◆</span><span class="line" data-astro-cid-alqif24d></span></div> <div class="post-content" data-astro-cid-gjtny2mx>  <p>Ao encontrar erros na compilação do novo <a href="https://atom.io/">Atom</a>, um amigo meu tentou experimentar a compilação com uma biblioteca libc alternativa. A troca de libs acabou deixando-o com o seguinte erro ao rodar qualquer comando:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>error while loading shared libraries: libc.so.6: </span></span>
+<span class="line"><span>    cannot open shared object file: No such file or directory</span></span>
+<span class="line"><span>    </span></span></code></pre>
 <p>A biblioteca C é muito importante para um sistema Linux, visto que praticamente todas as aplicações dependem dela. No caso, esta nova versão não era compatível com as aplicações disponíveis e o sistema deixou de funcionar corretamente.</p>
-<p>Em um caso como este, o sistema não irá bootar na próxima reinicialização. Procurando pela internet, vi que muitas pessoas &ldquo;resolvem&rdquo; o problema reinstalando o sistema, mas esta não é a única forma de sair disso.</p>
-<h3 id="a-solução">A Solução<a href="#a-solução" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>Em um caso como este, o sistema não irá bootar na próxima reinicialização. Procurando pela internet, vi que muitas pessoas “resolvem” o problema reinstalando o sistema, mas esta não é a única forma de sair disso.</p>
+<h3 id="a-solução">A Solução</h3>
 <p>Para solucionar sem formatação, precisamos de um drive USB de boot com algum sistema que utilize dkpg, pois precisamos da aplicação <strong>dpkg-deb</strong>.</p>
 <p>Se o seu sistema está com a libc quebrada, você provavelmente não conseguirá realizar um chroot para consertá-lo, portanto a idéia é montar as partições de sistema e apenas descompactar o pacote adequado a partir da raiz montada.</p>
-<p>Para prosseguir precisamos de uma versão/arquitetura correta da lib. Com sorte você a terá na pasta /var/cache/apt/archives/ do seu sistema, mas você também pode tentar encontrá-la no repositório de pacotes de sua distribuição (por exemplo, <a href="https://packages.debian.org/wheezy/libc6)">https://packages.debian.org/wheezy/libc6)</a>.</p>
+<p>Para prosseguir precisamos de uma versão/arquitetura correta da lib. Com sorte você a terá na pasta /var/cache/apt/archives/ do seu sistema, mas você também pode tentar encontrá-la no repositório de pacotes de sua distribuição (por exemplo, <a href="https://packages.debian.org/wheezy/libc6">https://packages.debian.org/wheezy/libc6</a>).</p>
 <p>Para quem está desacostumado com a montagem manual:</p>
-<pre><code>mount /dev/sdxY /ponto/de/montagem
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>mount /dev/sdxY /ponto/de/montagem</span></span></code></pre>
 <p>Sendo <em>sdxY</em> a partição em que se encontra a raiz de seu sistema.</p>
-<pre><code>dpkg-deb -X libc6_da_sua_arquitetura_e_versao.deb /ponto/de/montagem
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>dpkg-deb -X libc6_da_sua_arquitetura_e_versao.deb /ponto/de/montagem</span></span></code></pre>
 <p>Isto deve ser o suficiente para que você consiga bootar normalmente. De volta no seu sistema, é recomendado que você execute o comando <code>dpkg -i libc6_da_sua_arquitetura_e_versao.deb</code> assim que possível, para que os scripts de instalação da lib rodem corretamente.</p>
 <p>Espero ter ajudado mais alguém por aí.
-Até a próxima!</p>
-
-			</div>
-			<hr class="post-end">
-			<footer class="post-info">
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>298 Words</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2014-05-22 02:00 &#43;0200</p>
-			</footer>
-		</article>
-		<div class="post-nav thin">
-			<a class="next-post" href="https://prgrmmr.org/posts/acordar-cedo-dia-2/">
-				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Acordar Cedo - Dia 2</span>
-			</a>
-			<a class="prev-post" href="https://prgrmmr.org/posts/acordar-cedo-dia-1/">
-				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Acordar Cedo - Dia 1</span>
-			</a>
-		</div>
-		<div id="comments" class="thin">
-<div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "prgrmmr" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
-	</main>
-
-	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
-		<p>&copy; 2021 <a href="https://prgrmmr.org/">Henrique Magalhães</a> &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></p>
-		<p>
-			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://prgrmmr.org/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
-		</p>
-	</footer>
-
-
-
-	<script src="https://prgrmmr.org/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
-	
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-41812922-3', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-</body>
-
-</html>
+Até a próxima!</p>  </div> </article>  </main> <footer class="site-footer" data-astro-cid-sz7xmlte> <div class="ornament" role="separator" data-astro-cid-alqif24d><span class="line" data-astro-cid-alqif24d></span><span data-astro-cid-alqif24d>◆</span><span class="line" data-astro-cid-alqif24d></span></div> <div class="footer-inner" data-astro-cid-sz7xmlte> <div class="footer-social" data-astro-cid-sz7xmlte> <a href="https://www.linkedin.com/in/henrique-magalh%C3%A3es-33074223/" target="_blank" rel="noopener" data-astro-cid-sz7xmlte>LinkedIn</a> <span class="dot" data-astro-cid-sz7xmlte>·</span> <a href="https://github.com/magalhaesh" target="_blank" rel="noopener" data-astro-cid-sz7xmlte>GitHub</a> <span class="dot" data-astro-cid-sz7xmlte>·</span> <a href="https://t.me/magalhaesh" target="_blank" rel="noopener" data-astro-cid-sz7xmlte>Telegram</a> </div> <p class="footer-copy" data-astro-cid-sz7xmlte>
+&copy; 2026 Henrique Magalhães &middot;
+<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener" data-astro-cid-sz7xmlte>CC BY-NC 4.0</a> </p> </div> </footer>  </body></html> 

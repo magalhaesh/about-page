@@ -1,85 +1,16 @@
-<!DOCTYPE html>
-<html lang="en-us">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<meta name="theme-color" content="#494f5c">
-	<meta name="msapplication-TileColor" content="#494f5c">
-<meta itemprop="name" content="Git - Guia Prático">
-<meta itemprop="description" content="A princípio montei este guia para a Bis2Bis, onde estamos começando a usar git, porém nem todos os integrantes da equipe são programadores ou entendem sobre controle de versão.
-O objetivo aqui é facilitar um entendimento rápido de como operar um repositório git, permitindo um trabalho em equipe facilitado. Iremos da criação ou clonagem de repositórios até a interação básica com outros.
-O foco será na operação do repositório via o executável oficial do git, ou seja, pela linha de comando."><meta itemprop="datePublished" content="2014-10-20T17:26:12-02:00" />
-<meta itemprop="dateModified" content="2014-10-20T17:26:12-02:00" />
-<meta itemprop="wordCount" content="1387">
-<meta itemprop="keywords" content="" /><meta property="og:title" content="Git - Guia Prático" />
-<meta property="og:description" content="A princípio montei este guia para a Bis2Bis, onde estamos começando a usar git, porém nem todos os integrantes da equipe são programadores ou entendem sobre controle de versão.
-O objetivo aqui é facilitar um entendimento rápido de como operar um repositório git, permitindo um trabalho em equipe facilitado. Iremos da criação ou clonagem de repositórios até a interação básica com outros.
-O foco será na operação do repositório via o executável oficial do git, ou seja, pela linha de comando." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://prgrmmr.org/posts/git-guia-pratico/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2014-10-20T17:26:12-02:00" />
-<meta property="article:modified_time" content="2014-10-20T17:26:12-02:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Git - Guia Prático"/>
-<meta name="twitter:description" content="A princípio montei este guia para a Bis2Bis, onde estamos começando a usar git, porém nem todos os integrantes da equipe são programadores ou entendem sobre controle de versão.
-O objetivo aqui é facilitar um entendimento rápido de como operar um repositório git, permitindo um trabalho em equipe facilitado. Iremos da criação ou clonagem de repositórios até a interação básica com outros.
-O foco será na operação do repositório via o executável oficial do git, ou seja, pela linha de comando."/>
-
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-	<link rel="manifest" href="/site.webmanifest">
-	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
-	<link rel="shortcut icon" href="/favicon.ico">
-
-	<title>Git - Guia Prático</title>
-	<link rel="stylesheet" href="https://prgrmmr.org/css/style.min.2a3317f9a06d2aca754796ebe65a7f0f3f5b404762e0610fa94d939cfd384b7e.css" integrity="sha256-KjMX+aBtKsp1R5br5lp/Dz9bQEdi4GEPqU2TnP04S34=" crossorigin="anonymous">
-	
-</head>
-
-<body id="page">
-	
-	<header id="site-header" class="animated slideInUp faster">
-		<div class="hdr-wrapper section-inner">
-			<div class="hdr-left">
-				<div class="site-branding">
-					<a href="https://prgrmmr.org/">PRGRMMR</a>
-				</div>
-				<nav class="site-nav hide-in-mobile">
-					
-				<a href="https://prgrmmr.org/posts/">Blog</a>
-				<a href="https://prgrmmr.org/about/">About</a>
-
-				</nav>
-			</div>
-			<div class="hdr-right hdr-icons">
-				<span class="hdr-social hide-in-mobile"><a href="https://www.linkedin.com/in/henrique-magalh%C3%A3es-33074223/" target="_blank" rel="noopener me" title="Linkedin"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="https://github.com/magalhaesh" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a><a href="https://t.me/magalhaesh" target="_blank" rel="noopener me" title="Telegram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-8.609 3.33c-2.068.8-4.133 1.598-5.724 2.21a405.15 405.15 0 0 1-2.849 1.09c-.42.147-.99.332-1.473.901-.728.968.193 1.798.919 2.286 1.61.516 3.275 1.009 4.654 1.472.509 1.793.997 3.592 1.48 5.388.16.36.506.494.864.498l-.002.018s.281.028.555-.038a2.1 2.1 0 0 0 .933-.517c.345-.324 1.28-1.244 1.811-1.764l3.999 2.952.032.018s.442.311 1.09.355c.324.022.75-.04 1.116-.308.37-.27.613-.702.728-1.196.342-1.492 2.61-12.285 2.997-14.072l-.01.042c.27-1.006.17-1.928-.455-2.474a1.654 1.654 0 0 0-1.034-.407z"/></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
-			</div>
-		</div>
-	</header>
-	<div id="mobile-menu" class="animated fast">
-		<ul>
-			<li><a href="https://prgrmmr.org/posts/">Blog</a></li>
-			<li><a href="https://prgrmmr.org/about/">About</a></li>
-		</ul>
-	</div>
-
-
-	<main class="site-main section-inner animated fadeIn faster">
-		<article class="thin">
-			<header class="post-header">
-				<div class="post-meta"><span>Oct 20, 2014</span></div>
-				<h1>Git - Guia Prático</h1>
-			</header>
-			<div class="content">
-				<p>A princípio montei este guia para a <a href="http://bis2bis.com.br/">Bis2Bis</a>, onde estamos começando a usar git, porém nem todos os integrantes da equipe são programadores ou entendem sobre controle de versão.</p>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="alternate" type="application/rss+xml" title="PRGRMMR" href="/rss.xml"><link rel="canonical" href="https://prgrmmr.org/posts/git-guia-pratico/"><title>Git - Guia Prático · PRGRMMR</title><meta name="description" content="Git - Guia Prático"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:url" content="https://prgrmmr.org/posts/git-guia-pratico/"><meta property="og:title" content="Git - Guia Prático · PRGRMMR"><meta property="og:description" content="Git - Guia Prático"><!-- Google Analytics (GA4) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-BFQP2F9CTZ"></script><script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BFQP2F9CTZ');
+  </script><link rel="stylesheet" href="/_astro/_slug_.Crzmtsm8.css">
+<style>.generative-art[data-astro-cid-vzfnd445]{display:block;margin:0 auto}
+.bg-mandala[data-astro-cid-gjtny2mx]{position:fixed;bottom:-400px;right:-400px;opacity:.07;pointer-events:none;z-index:0}.post-article[data-astro-cid-gjtny2mx]{position:relative;z-index:1}.header-mandala[data-astro-cid-gjtny2mx]{width:120px;height:120px;margin:0 auto}.header-mandala[data-astro-cid-gjtny2mx] canvas{width:120px!important;height:120px!important}.post-header[data-astro-cid-gjtny2mx]{text-align:center;margin-bottom:1.5rem}.post-header[data-astro-cid-gjtny2mx] h1[data-astro-cid-gjtny2mx]{margin-top:1rem;margin-bottom:.3rem}.post-date[data-astro-cid-gjtny2mx]{font-size:.9rem;font-style:italic}@media(max-width:900px){.bg-mandala[data-astro-cid-gjtny2mx]{display:none}}
+</style></head> <body> <header class="site-header" data-astro-cid-3ef6ksr2> <div class="header-inner" data-astro-cid-3ef6ksr2> <a href="/" class="site-title" data-astro-cid-3ef6ksr2>PRGRMMR</a> <nav class="site-nav" data-astro-cid-3ef6ksr2> <a href="/posts" class="active" data-astro-cid-3ef6ksr2>Posts</a> <a href="/about" data-astro-cid-3ef6ksr2>About</a> </nav> </div> </header>  <main class="page-container">  <div class="bg-mandala" data-astro-cid-gjtny2mx> <canvas class="generative-art" data-seed="git-guia-pratico" data-size="1200" data-complexity="5" data-animate="false" width="1200" height="1200" style="width: 1200px; height: 1200px;" data-astro-cid-vzfnd445></canvas> <script type="module" src="/_astro/GenerativeArt.astro_astro_type_script_index_0_lang.7RMFUpT3.js"></script>  </div> <article class="post-article" data-astro-cid-gjtny2mx> <header class="post-header" data-astro-cid-gjtny2mx> <div class="header-mandala" data-astro-cid-gjtny2mx> <canvas class="generative-art" data-seed="git-guia-pratico" data-size="400" data-complexity="5" data-animate="false" width="400" height="400" style="width: 400px; height: 400px;" data-astro-cid-vzfnd445></canvas>   </div> <h1 data-astro-cid-gjtny2mx>Git - Guia Prático</h1> <time class="post-date text-muted" datetime="2014-10-20T19:26:12.000Z" data-astro-cid-gjtny2mx> October 20, 2014 </time> </header> <div class="ornament" role="separator" data-astro-cid-alqif24d><span class="line" data-astro-cid-alqif24d></span><span data-astro-cid-alqif24d>◆</span><span class="line" data-astro-cid-alqif24d></span></div> <div class="post-content" data-astro-cid-gjtny2mx>  <p>A princípio montei este guia para a <a href="http://bis2bis.com.br/">Bis2Bis</a>, onde estamos começando a usar git, porém nem todos os integrantes da equipe são programadores ou entendem sobre controle de versão.</p>
 <p>O objetivo aqui é facilitar um entendimento rápido de como operar um repositório git, permitindo um trabalho em equipe facilitado. Iremos da criação ou clonagem de repositórios até a interação básica com outros.</p>
 <p>O foco será na operação do repositório via o executável oficial do git, ou seja, pela linha de comando. Porém, se os conceitos forem absorvidos corretamente, é possível usar o git com diversas outras ferramentas, inclusives muitas delas gráficas.</p>
 <p>Apesar do nosso foco prático, vale reforçar que entender a teoria por trás do funcionamento do git facilita <strong>muito</strong> seu uso.</p>
-<h2 id="o-que-é-o-git">O que é o git?<a href="#o-que-é-o-git" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<h2 id="o-que-é-o-git">O que é o git?</h2>
 <p>O git é um sistema de controle de versões, que grava mudanças a arquivos ou conjuntos de arquivos ao longo do tempo, para que você possa alternar ou checar outras versões mais tarde. Apesar de ser muito bom para se trabalhar em equipe, também é muito útil para a organização de projetos solo.</p>
 <p>Algumas coisas que você pode fazer com git:</p>
 <ul>
@@ -89,207 +20,124 @@ O foco será na operação do repositório via o executável oficial do git, ou 
 <li>Facilitar combinação de arquivos (2 ou mais pessoas trabalhando na mesma coisa);</li>
 <li>Criar e manipular diversas versões do mesmo projeto;</li>
 </ul>
-<h2 id="instalação">Instalação<a href="#instalação" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<h2 id="instalação">Instalação</h2>
 <p>O Git possui instaladores gráficos para <a href="http://git-scm.com/download/windows">Windows</a> e <a href="http://git-scm.com/download/mac">Mac</a>. Basta baixá-los e realizar uma instalação padrão.</p>
 <p>Ao final da instalação, devemos ter uma linha de comando Git funcional (Git Bash, no Windows).</p>
-<h2 id="configuração-de-usuário">Configuração de usuário<a href="#configuração-de-usuário" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<h2 id="configuração-de-usuário">Configuração de usuário</h2>
 <p>Após a instalação, é necessário realizar a configuração da aplicação. Os comandos a seguir configuram as informações que serão gravadas no histórico, e só precisam ser executados uma vez:</p>
-<pre><code>$ git config --global user.name &quot;Nome Sobrenome&quot;
-$ git config --global user.email &quot;email@endereco.com&quot;
-</code></pre>
-<h2 id="usando-o-repositório">Usando o repositório<a href="#usando-o-repositório" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ git config --global user.name "Nome Sobrenome"</span></span>
+<span class="line"><span>$ git config --global user.email "email@endereco.com"</span></span></code></pre>
+<h2 id="usando-o-repositório">Usando o repositório</h2>
 <p>Por ser um repositório descentralizado, cada computador de trabalho possui as mesmas funcionalidade de um servidor git.</p>
 <p>Durante o fluxo de trabalho iremos manipular apenas o repositório local, adicionando, modificando ou removendo arquivos.</p>
 <p>Após um ciclo de trabalho, é necessário sincronizar seu repositório com o repositório compartilhado, e apenas após isto enviar suas mudanças. Desta maneira, cada um fica responsabilizado por juntar suas mudanças com as do resto da equipe.</p>
 <p><img src="/images/2014/Sep/git-transport.png" alt="Comandos de Transporte de Dados"></p>
-<h2 id="preparando-um-projeto">Preparando um projeto<a href="#preparando-um-projeto" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
-<h3 id="projetos-existentes">Projetos existentes:<a href="#projetos-existentes" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<h2 id="preparando-um-projeto">Preparando um projeto</h2>
+<h3 id="projetos-existentes">Projetos existentes:</h3>
 <p>Caso um repositório remoto exista, você deve cloná-lo da seguinte maneira:</p>
-<pre><code>$ git clone usuario@servidor:pasta/com/projeto.git
-</code></pre>
-<p>Este comando irá criar uma pasta de nome &lsquo;projeto&rsquo; no diretório atual, já atualizado com as últimas modificações.</p>
-<h3 id="projetos-novos">Projetos novos:<a href="#projetos-novos" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<p>Caso o repositório remoto não exista (ou esteja vazio), você deve criá-lo utilizando o <!-- raw HTML omitted -->git init<!-- raw HTML omitted --> dentro da pasta do projeto.</p>
-<pre><code>$ pwd #Verificando se estamos dentro da pasta do projeto
-/pasta/raiz/projeto #Retorno do comando acima, verificamos que está certo
-$ git init
-</code></pre>
-<h2 id="ignorando-arquivos">Ignorando arquivos<a href="#ignorando-arquivos" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
-<p>Se necessário, é possível pedir ao git que não versione determinados arquivos. Para isto, basta criar um arquivo <!-- raw HTML omitted -->.gitignore<!-- raw HTML omitted --> na pasta raiz do projeto.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ git clone usuario@servidor:pasta/com/projeto.git</span></span></code></pre>
+<p>Este comando irá criar uma pasta de nome ‘projeto’ no diretório atual, já atualizado com as últimas modificações.</p>
+<h3 id="projetos-novos">Projetos novos:</h3>
+<p>Caso o repositório remoto não exista (ou esteja vazio), você deve criá-lo utilizando o <code>git init</code> dentro da pasta do projeto.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ pwd #Verificando se estamos dentro da pasta do projeto</span></span>
+<span class="line"><span>/pasta/raiz/projeto #Retorno do comando acima, verificamos que está certo</span></span>
+<span class="line"><span>$ git init</span></span></code></pre>
+<h2 id="ignorando-arquivos">Ignorando arquivos</h2>
+<p>Se necessário, é possível pedir ao git que não versione determinados arquivos. Para isto, basta criar um arquivo <code>.gitignore</code> na pasta raiz do projeto.</p>
 <p>Cada linha escrita no .gitignore representa um caminho ou um arquivo que deve ser ignorado pelo sistema de versionamento.</p>
-<pre><code>.idea/
-.phpstorm.meta.php
-/app/etc/local.xml
-/var/
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>.idea/</span></span>
+<span class="line"><span>.phpstorm.meta.php</span></span>
+<span class="line"><span>/app/etc/local.xml</span></span>
+<span class="line"><span>/var/</span></span></code></pre>
 <p>Neste exemplo, o arquivo app/etc/local.xml diretamente e todos os arquivos dentro da pasta var, indiretamente.</p>
 <p>Devemos sempre tentar ignorar os arquivos e pastas que a equipe não irá modificar, ou que serão úteis apenas individualmente e podem atrapalhar o resto da equipe.</p>
-<h2 id="fluxo-de-trabalho">Fluxo de trabalho<a href="#fluxo-de-trabalho" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<h2 id="fluxo-de-trabalho">Fluxo de trabalho</h2>
 <p>Neste ponto você já deve estar pronto para começar a versionar o seu projeto.</p>
 <p>Trabalhando com Git, normalmente temos o seguinte fluxo:</p>
 <ol>
-<li><!-- raw HTML omitted -->git add<!-- raw HTML omitted --> - adicionando suas modificações;</li>
-<li><!-- raw HTML omitted -->git commit<!-- raw HTML omitted --> - Confirmando e salvando suas modificações;</li>
-<li><!-- raw HTML omitted -->git pull<!-- raw HTML omitted --> - Atualizando seu projeto com as modificações da equipe;</li>
-<li><!-- raw HTML omitted -->git push<!-- raw HTML omitted --> - Atualizando o repositório da equipe com suas modificações;</li>
+<li><code>git add</code> - adicionando suas modificações;</li>
+<li><code>git commit</code> - Confirmando e salvando suas modificações;</li>
+<li><code>git pull</code> - Atualizando seu projeto com as modificações da equipe;</li>
+<li><code>git push</code> - Atualizando o repositório da equipe com suas modificações;</li>
 </ol>
-<h2 id="adicionando-arquivos">Adicionando arquivos<a href="#adicionando-arquivos" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<h2 id="adicionando-arquivos">Adicionando arquivos</h2>
 <p>Podemos adicionar modificações individualmente no versionamento:</p>
-<pre><code>$ git add helloworld.txt
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ git add helloworld.txt</span></span></code></pre>
 <p>Ou para adicionar tudo de uma só vez:</p>
-<pre><code>$ git add -A #ou git add --all
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ git add -A #ou git add --all</span></span></code></pre>
 <p>Este comando também possui um modo interativo, que vai perguntando o que você deseja fazer:</p>
-<pre><code>$ git add -i
-</code></pre>
-<h2 id="checando-status">Checando Status<a href="#checando-status" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
-<p>Para saber em qual estado se encontra o seu diretório de trabalho, pode-se usar o comando &lsquo;git status&rsquo;. Este comando informa se o repositório local está limpo ou se existem mudanças locais desde o último commit.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ git add -i</span></span></code></pre>
+<h2 id="checando-status">Checando Status</h2>
+<p>Para saber em qual estado se encontra o seu diretório de trabalho, pode-se usar o comando ‘git status’. Este comando informa se o repositório local está limpo ou se existem mudanças locais desde o último commit.</p>
 <p>Para checar o status do repositório local:</p>
-<pre><code>On branch master
-Changes to be committed:
-  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
-
-	new file:   helloworld.txt
-</code></pre>
-<p>Neste exemplo o comando retorna informando o arquivo &lsquo;helloworld.txt&rsquo; será adicionado no próximo commit.</p>
-<h2 id="realizando-commits">Realizando Commits<a href="#realizando-commits" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>On branch master</span></span>
+<span class="line"><span>Changes to be committed:</span></span>
+<span class="line"><span>  (use "git reset HEAD &#x3C;file>..." to unstage)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>	new file:   helloworld.txt</span></span></code></pre>
+<p>Neste exemplo o comando retorna informando o arquivo ‘helloworld.txt’ será adicionado no próximo commit.</p>
+<h2 id="realizando-commits">Realizando Commits</h2>
 <p>Para realizar o commit:</p>
-<pre><code>$ git commit -m &quot;Comentário do commit&quot;
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ git commit -m "Comentário do commit"</span></span></code></pre>
 <p>Você deve ver um output semelhante a:</p>
-<pre><code>[master (root-commit) 9416416] Comentário do commit
-1 files changed, 1 insertions(+), 0 deletions(-)
- create mode 100644 helloworld.txt
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[master (root-commit) 9416416] Comentário do commit</span></span>
+<span class="line"><span>1 files changed, 1 insertions(+), 0 deletions(-)</span></span>
+<span class="line"><span> create mode 100644 helloworld.txt</span></span>
+<span class="line"><span> </span></span></code></pre>
 <p>Neste exemplo o comando retorna informando que o diretório de trabalho está igual ao repositório local, portanto se encontra limpo. Podemos realizar operações com outros repositórios.</p>
-<h2 id="checando-status-novamente">Checando status novamente<a href="#checando-status-novamente" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<h2 id="checando-status-novamente">Checando status novamente</h2>
 <p>É sempre interessante checar como está seu repositório antes e depois das operações:</p>
-<pre><code>$ git status
-On branch master
-nothing to commit (working directory clean)
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ git status</span></span>
+<span class="line"><span>On branch master</span></span>
+<span class="line"><span>nothing to commit (working directory clean)</span></span></code></pre>
 <p>Neste exemplo o comando retorna informando que o diretório de trabalho está igual ao repositório local, portanto se encontra limpo (clean). Este estado é necessário para que se realize interações com outros repositórios.</p>
-<h2 id="visualizando-histórico">Visualizando Histórico<a href="#visualizando-histórico" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
-<p>Para visualizar seu repositório local, existe uma ferramenta gráfica muito útil chamada <!-- raw HTML omitted -->gitk<!-- raw HTML omitted -->. Este comando traz uma ferramenta padrão do git e pode ser utilizado a qualquer momento. Ele abre uma janela contendo cada commit feito no projeto, mostrando o que foi feito a cada passo.</p>
-<h2 id="interagindo-com-outros-repositórios">Interagindo com outros repositórios<a href="#interagindo-com-outros-repositórios" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
-<p>Tudo o que fizemos até agora ocorreu na sua máquina, de forma local. Ainda não usamos a internet e nem interagimos com outros colegas de equipe ainda. O comando <!-- raw HTML omitted -->git commit<!-- raw HTML omitted --> apenas armazena informações no repositório local.</p>
+<h2 id="visualizando-histórico">Visualizando Histórico</h2>
+<p>Para visualizar seu repositório local, existe uma ferramenta gráfica muito útil chamada <code>gitk</code>. Este comando traz uma ferramenta padrão do git e pode ser utilizado a qualquer momento. Ele abre uma janela contendo cada commit feito no projeto, mostrando o que foi feito a cada passo.</p>
+<h2 id="interagindo-com-outros-repositórios">Interagindo com outros repositórios</h2>
+<p>Tudo o que fizemos até agora ocorreu na sua máquina, de forma local. Ainda não usamos a internet e nem interagimos com outros colegas de equipe ainda. O comando <code>git commit</code> apenas armazena informações no repositório local.</p>
 <p>Após um ou mais commits, você tem a opção de enviar suas mudanças para algum servidor remoto compartilhado.</p>
 <p>As explicações feitas aqui se referem a interações feitas diretamente entre os repositórios, sem intermediários. No caso de aplicações como Github ou Bitbucket existem os fluxos de <strong>pull request</strong>, que não serão cobertos aqui, pois variam de aplicação para aplicação.</p>
-<h3 id="projetos-existentes-1">Projetos existentes:<a href="#projetos-existentes-1" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<p>No caso de um projeto clonado, você já terá um repositório chamado <!-- raw HTML omitted -->origin<!-- raw HTML omitted --> na sua lista de repositórios conhecidos:</p>
-<pre><code>$ git remote #verificando quais repositórios remotos existem
-origin
-</code></pre>
+<h3 id="projetos-existentes-1">Projetos existentes:</h3>
+<p>No caso de um projeto clonado, você já terá um repositório chamado <code>origin</code> na sua lista de repositórios conhecidos:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ git remote #verificando quais repositórios remotos existem</span></span>
+<span class="line"><span>origin</span></span></code></pre>
 <p>Tudo certo, neste caso você está pronto para interagir com o origin.</p>
-<h3 id="projetos-novos-1">Projetos novos:<a href="#projetos-novos-1" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<h3 id="projetos-novos-1">Projetos novos:</h3>
 <p>Para projetos recem criados, é necessário se adicionar um repositório remoto:</p>
-<pre><code>$ git remote #verificando quais repositórios existem
-$ git remote add origin git@endereco.com:projetos/projeto.git
-$ git remote #tentando novamente
-origin
-</code></pre>
-<h2 id="comandos-de-interação">Comandos de interação<a href="#comandos-de-interação" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ git remote #verificando quais repositórios existem</span></span>
+<span class="line"><span>$ git remote add origin git@endereco.com:projetos/projeto.git</span></span>
+<span class="line"><span>$ git remote #tentando novamente</span></span>
+<span class="line"><span>origin</span></span></code></pre>
+<h2 id="comandos-de-interação">Comandos de interação</h2>
 <p>É interessante ter alguns conhecimentos básicos sobre branches antes de utilizar estes comandos, mas para que se possa começar a interagir rapidamente, seguem alguns exemplos no proximo slide.</p>
-<p>Os próximos comandos utilizam a branch &lsquo;master&rsquo; para exemplificar suas funcionalidades, porém, nem sempre você ira querer interagir com a master.</p>
-<h3 id="pulling">Pulling<a href="#pulling" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>Os próximos comandos utilizam a branch ‘master’ para exemplificar suas funcionalidades, porém, nem sempre você ira querer interagir com a master.</p>
+<h3 id="pulling">Pulling</h3>
 <p>Antes de se enviar mudanças a um repositório remoto, deve-se pegar as mudanças ocorridas desde sua última interação.</p>
-<pre><code>$ git pull origin master #verifica e combina as modificações do origin
-</code></pre>
-<p>É interessante apontar que <!-- raw HTML omitted -->git pull<!-- raw HTML omitted --> é um &ldquo;comando de atalho&rdquo;. Ele tem o mesmo efeito que outros dois comandos git:</p>
-<pre><code>$ git fetch origin master #verifica e baixa modificações existentes no origin
-$ git merge origin/master master #combina as modificações
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ git pull origin master #verifica e combina as modificações do origin</span></span></code></pre>
+<p>É interessante apontar que <code>git pull</code> é um “comando de atalho”. Ele tem o mesmo efeito que outros dois comandos git:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ git fetch origin master #verifica e baixa modificações existentes no origin</span></span>
+<span class="line"><span>$ git merge origin/master master #combina as modificações</span></span></code></pre>
 <p>O fetch coleta as últimas mudanças do repositório remoto, e o merge realiza a junção das mudanças coletadas com as mudanças locais.</p>
-<h3 id="pushing">Pushing<a href="#pushing" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<h3 id="pushing">Pushing</h3>
 <p>Para enviar modificações a um servidor remoto, é utilizado o comando push:</p>
-<pre><code>$ git push origin master
-</code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ git push origin master</span></span></code></pre>
 <p>Este comando só será concluído corretamente caso seu repositório esteja sincronizado com as últimas mudanças do repositório remoto.</p>
 <p>Caso contrário, irá retornar uma mensagem de erro indicando que seu push foi rejeitado, e que é necessário executar um pull.</p>
-<h2 id="revisão-de-comandos">Revisão de comandos<a href="#revisão-de-comandos" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<h2 id="revisão-de-comandos">Revisão de comandos</h2>
 <p>Repassando rapidamente os comandos que vimos:</p>
-<h3 id="criação">Criação:<a href="#criação" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<pre><code>$ git clone usuario@endereco:projetos/projeto.git #clonar repositório
-$ git init #criar repositório local
-</code></pre>
-<h3 id="visualizando-o-que-ocorre">Visualizando o que ocorre:<a href="#visualizando-o-que-ocorre" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<pre><code>$ git status #mostra arquivos modificados
-$ git diff HEAD #mostra as diferenças desde o último commit
-$ gitk #abre programa padrão para visualização histórico
-</code></pre>
-<h3 id="preparando-e-realizando-commits">Preparando e realizando commits:<a href="#preparando-e-realizando-commits" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<pre><code>$ git add -A #adicionar todas as mudanças para o próximo commit
-$ git add -i #menu interativo para adicionar mudanças
-$ git commit -m 'mensagem' #salva todas as alterações adicionadas
-</code></pre>
-<h3 id="compartilhando-suas-mudanças">Compartilhando suas mudanças:<a href="#compartilhando-suas-mudanças" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<pre><code>$ git pull repositorio branch #baixa e merge mudanças automaticamente
-$ git push repositorio branch #sobe suas mudanças a um servidor remoto
-</code></pre>
-
-			</div>
-			<hr class="post-end">
-			<footer class="post-info">
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1387 Words</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2014-10-20 21:26 &#43;0200</p>
-			</footer>
-		</article>
-		<div class="post-nav thin">
-			<a class="next-post" href="https://prgrmmr.org/posts/letter_and_a_wrench/">
-				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Letter and a Wrench</span>
-			</a>
-			<a class="prev-post" href="https://prgrmmr.org/posts/tuneis-ssh/">
-				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Túneis SSH</span>
-			</a>
-		</div>
-		<div id="comments" class="thin">
-<div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "prgrmmr" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
-	</main>
-
-	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
-		<p>&copy; 2021 <a href="https://prgrmmr.org/">Henrique Magalhães</a> &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></p>
-		<p>
-			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://prgrmmr.org/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
-		</p>
-	</footer>
-
-
-
-	<script src="https://prgrmmr.org/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
-	
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-41812922-3', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-</body>
-
-</html>
+<h3 id="criação">Criação:</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ git clone usuario@endereco:projetos/projeto.git #clonar repositório</span></span>
+<span class="line"><span>$ git init #criar repositório local</span></span></code></pre>
+<h3 id="visualizando-o-que-ocorre">Visualizando o que ocorre:</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ git status #mostra arquivos modificados</span></span>
+<span class="line"><span>$ git diff HEAD #mostra as diferenças desde o último commit</span></span>
+<span class="line"><span>$ gitk #abre programa padrão para visualização histórico</span></span></code></pre>
+<h3 id="preparando-e-realizando-commits">Preparando e realizando commits:</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ git add -A #adicionar todas as mudanças para o próximo commit</span></span>
+<span class="line"><span>$ git add -i #menu interativo para adicionar mudanças</span></span>
+<span class="line"><span>$ git commit -m 'mensagem' #salva todas as alterações adicionadas</span></span></code></pre>
+<h3 id="compartilhando-suas-mudanças">Compartilhando suas mudanças:</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ git pull repositorio branch #baixa e merge mudanças automaticamente</span></span>
+<span class="line"><span>$ git push repositorio branch #sobe suas mudanças a um servidor remoto</span></span></code></pre>  </div> </article>  </main> <footer class="site-footer" data-astro-cid-sz7xmlte> <div class="ornament" role="separator" data-astro-cid-alqif24d><span class="line" data-astro-cid-alqif24d></span><span data-astro-cid-alqif24d>◆</span><span class="line" data-astro-cid-alqif24d></span></div> <div class="footer-inner" data-astro-cid-sz7xmlte> <div class="footer-social" data-astro-cid-sz7xmlte> <a href="https://www.linkedin.com/in/henrique-magalh%C3%A3es-33074223/" target="_blank" rel="noopener" data-astro-cid-sz7xmlte>LinkedIn</a> <span class="dot" data-astro-cid-sz7xmlte>·</span> <a href="https://github.com/magalhaesh" target="_blank" rel="noopener" data-astro-cid-sz7xmlte>GitHub</a> <span class="dot" data-astro-cid-sz7xmlte>·</span> <a href="https://t.me/magalhaesh" target="_blank" rel="noopener" data-astro-cid-sz7xmlte>Telegram</a> </div> <p class="footer-copy" data-astro-cid-sz7xmlte>
+&copy; 2026 Henrique Magalhães &middot;
+<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener" data-astro-cid-sz7xmlte>CC BY-NC 4.0</a> </p> </div> </footer>  </body></html> 
